@@ -186,12 +186,7 @@ if __name__ == "__main__":
     failure = None
     init = True
     try:
-        virtual_pipeline_model_parallel_sizes = (None, 2,)
-        if HAS_TORCH_UCC:
-            # Deliberately skipping test with interleaved schedule for BERT model.
-            # It deadlocks on hybrid UCC/NCCL backend.
-            virtual_pipeline_model_parallel_sizes = (None,)
-        for virtual_pipeline_model_parallel_size in virtual_pipeline_model_parallel_sizes:
+        for virtual_pipeline_model_parallel_size in (2, None):
             args = global_vars.get_args()
             async_comm = not args.sequence_parallel and virtual_pipeline_model_parallel_size is None
             data_idx = 0

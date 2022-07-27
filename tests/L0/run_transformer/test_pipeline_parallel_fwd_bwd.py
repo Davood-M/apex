@@ -49,12 +49,6 @@ def get_init_weights_func(offset: int = 0):
     return init_weights
 
 
-def get_dtype_for_comparison():
-    if(torch.cuda.get_device_capability() >= (8, 0)):
-        return torch.float64
-    return torch.float32
-
-
 def get_target_loss_and_model(global_batch_shape: tuple, hidden_size: int, total_layers: int) -> Tuple[torch.Tensor, List[torch.Tensor]]:
     model = []
     dtype = get_dtype_for_comparison()
